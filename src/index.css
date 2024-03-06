@@ -16,6 +16,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --bg-color: #f2f2f2;
