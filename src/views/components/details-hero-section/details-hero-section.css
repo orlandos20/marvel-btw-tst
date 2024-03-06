@@ -1,0 +1,26 @@
+@media (min-width: 768px) {
+  .hero-section {
+    height: 320px;
+    background-color: var(--main-text-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-section--container {
+    max-width: var(--details-container-max-w);
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .hero-section--container__image {
+    height: 100%;
+  }
+
+  .hero-section--container__description {
+    & > h2 {
+      font-size: 2.5rem;
+    }
+  }
+}

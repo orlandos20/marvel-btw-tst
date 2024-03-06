@@ -4,6 +4,7 @@
   --marvel-red: #ec1d24;
   --details-hero-bg-color: #000;
   --details-container-max-w: 960px;
+  --desktop-layout-padding: 48px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

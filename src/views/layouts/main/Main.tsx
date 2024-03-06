@@ -9,7 +9,7 @@ const Main: React.FC<PropsWithChildren> = ({ children }) => {
     <section className="layout">
       <Header />
       <ProgressBar />
-      <section className="layout--content__container">{children}</section>
+      <section>{children}</section>
     </section>
   );
 };
