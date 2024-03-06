@@ -1,0 +1,9 @@
+.header {
+  max-height: 84px;
+  background-color: var(--main-text-color);
+  padding: 16px 48px 16px 48px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

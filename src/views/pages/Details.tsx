@@ -1,16 +1,13 @@
 import { PropsWithChildren } from 'react';
 
+import { MainLayout } from '../layouts';
+
 const Details: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <MainLayout>
       Details Page
       <div>{children}</div>
-    </div>
+    </MainLayout>
   );
 };
 
