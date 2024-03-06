@@ -1,13 +1,17 @@
-import { PropsWithChildren } from 'react';
-
 import { MainLayout } from '../layouts';
 import DetailsHero from '../components/details-hero-section/DetailsHero';
+import Slider from '../components/slider/Slider';
 
-const Details: React.FC<PropsWithChildren> = ({ children }) => {
+interface DetailsProps {
+  characterId: string;
+}
+
+const Details: React.FC<DetailsProps> = ({ characterId }) => {
   return (
     <MainLayout>
       <DetailsHero />
-      <div>{children}</div>
+      <Slider />
+      <div>{characterId}</div>
     </MainLayout>
   );
 };

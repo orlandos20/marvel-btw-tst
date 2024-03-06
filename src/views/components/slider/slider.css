@@ -1,0 +1,37 @@
+h3 {
+  font-size: unset;
+  margin-block: 0;
+  line-height: normal;
+}
+
+.slider {
+  display: flex;
+  max-width: var(--details-container-max-w);
+  margin: var(--desktop-layout-padding) auto;
+  overflow: hidden;
+}
+
+.slider--container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider--title {
+  font-size: 2.5rem;
+  margin-bottom: calc(var(--desktop-layout-padding) / 2);
+}
+
+.slider--container__slides {
+  width: 100%;
+  overflow-x: scroll;
+  & > ul {
+    display: flex;
+    gap: 16px;
+    padding-inline: 0;
+    & > li {
+      list-style: none;
+    }
+  }
+}

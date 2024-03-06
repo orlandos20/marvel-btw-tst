@@ -10,7 +10,7 @@ function App() {
       <Route path="/" component={Home} />
 
       <Route path="/character/:name">
-        {(params) => <Details>{params.name}!</Details>}
+        {(params) => <Details characterId={params.name} />}
       </Route>
 
       {/* Default route in a switch */}
