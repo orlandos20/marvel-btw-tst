@@ -4,11 +4,13 @@ import { Link } from 'wouter';
 import reactLogo from '../../assets/react.svg';
 import viteLogo from '/vite.svg';
 
+import { MainLayout } from '../layouts';
+
 const Home = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <MainLayout>
       <div>
         <Link href="/character/wolverine">Profile</Link>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -30,7 +32,7 @@ const Home = () => {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </MainLayout>
   );
 };
 
