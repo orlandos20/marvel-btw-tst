@@ -1,4 +1,5 @@
 .card {
+  --card-footer-height: 56px;
   width: 180px;
   height: 245px;
   border: 0 0 3px 0;
@@ -21,12 +22,13 @@
   }
   &:hover .card--footer > .card--footer__divider {
     transition: height 0.5s ease-in;
-    height: 100%;
+    height: var(--card-footer-height);
   }
 }
 
 .card--image {
   height: 190px;
+  position: relative;
 }
 
 .card--image__content {
@@ -36,7 +38,7 @@
 }
 
 .card--footer {
-  height: 56px;
+  height: var(--card-footer-height);
   background-color: var(--main-text-color);
 }
 
@@ -56,4 +58,63 @@
   align-items: center;
   height: 100%;
   padding-inline: 16px;
+}
+
+.card--footer__description--name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+  min-width: 130px;
+  min-height: 20px;
+}
+
+.text-loading,
+.img-loading {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  animation: unset;
+  border: unset;
+  border-radius: unset;
+}
+
+.text-loading::after,
+.img-loading::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+  content: '';
+}
+
+.img-loading {
+  background-color: #dbdbdb;
+}
+
+.img-loading::after {
+  background-image: linear-gradient(
+    90deg,
+    #dbdbdb 0,
+    #e3e3e3 50%,
+    #dbdbdb 100%
+  );
+}
+
+.text-loading {
+  background-color: #3d3d3d;
+}
+
+.text-loading::after {
+  background-image: linear-gradient(90deg, #3d3d3d 50%, #2d2d2d 50%, #000 100%);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
