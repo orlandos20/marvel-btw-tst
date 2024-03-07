@@ -1,9 +1,9 @@
-import { MainLayout } from '../layouts';
-import { CharacterCard } from '../components/cards';
-import Grid from '../components/grid/Grid';
+import { MainLayout } from '@/views/layouts';
+import { CharacterCard } from '@/components/cards';
+import Grid from '@/components/grid/Grid';
 
-import { useGetAllCharactersUseCase } from '../../hooks/characters/useGetAllCharactersUseCase';
-import { Character } from '../../modules/characters/domain/Character';
+import { useGetAllCharactersUseCase } from '@/hooks/characters/useGetAllCharactersUseCase';
+import { Character } from '@/modules/characters/domain/Character';
 
 const Home = () => {
   const { characters, limit } = useGetAllCharactersUseCase();

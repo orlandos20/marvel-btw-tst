@@ -1,8 +1,8 @@
 import { useLocation } from 'wouter';
-
 import { flushSync } from 'react-dom';
+
+import { Character } from '@/modules/characters/domain/Character';
 import './character-card.css';
-import { Character } from '../../../../modules/characters/domain/Character';
 
 interface CharacterCardProps {
   loading?: boolean;

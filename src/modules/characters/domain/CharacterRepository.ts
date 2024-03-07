@@ -1,5 +1,5 @@
 import { Character } from './Character';
-import { MarvelResponseWrapper } from '../../../types/marvelApiResponseTypes';
+import { MarvelResponseWrapper } from '@/types/marvelApiResponseTypes';
 
 interface DefaultParams {
   limit: string | number;

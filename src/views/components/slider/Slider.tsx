@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-import './slider.css';
+import CharacterCard from '@/components/cards/character/CharacterCard';
 
-import CharacterCard from '../cards/character/CharacterCard';
+import './slider.css';
 
 const Slider = () => {
   const sliderRef = useRef<HTMLDivElement>(null);

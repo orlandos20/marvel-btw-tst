@@ -1,9 +1,9 @@
 import {
   CharacterRepository,
   GetAllParams,
-} from '../domain/CharacterRepository';
-import { Character } from '../domain/Character';
-import { MarvelResponseWrapper } from '../../../types/marvelApiResponseTypes';
+} from '@/modules/characters/domain/CharacterRepository';
+import { Character } from '@/modules/characters/domain/Character';
+import { MarvelResponseWrapper } from '@/types/marvelApiResponseTypes';
 
 export const getAllCharacters = (
   characterRepository: CharacterRepository

@@ -1,9 +1,11 @@
-import { MainLayout } from '../layouts';
-import DetailsHero from '../components/details-hero-section/DetailsHero';
-import Slider from '../components/slider/Slider';
-import { flushSync } from 'react-dom';
 import { useEffect } from 'react';
+import { flushSync } from 'react-dom';
+
 import { useLocation } from 'wouter';
+
+import { MainLayout } from '@/views/layouts';
+import DetailsHero from '@/components/details-hero-section/DetailsHero';
+import Slider from '@/components/slider/Slider';
 
 interface DetailsProps {
   characterId: string;

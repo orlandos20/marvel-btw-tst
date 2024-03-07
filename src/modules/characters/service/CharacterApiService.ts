@@ -1,7 +1,7 @@
 import {
   CharacterRepository,
   GetAllParams,
-} from '../domain/CharacterRepository';
+} from '@/modules/characters/domain/CharacterRepository';
 
 interface ServiceOptions {
   requester?: typeof window.fetch;

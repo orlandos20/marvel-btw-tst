@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
+
+import Header from '@/components/header/Header';
+import ProgressBar from '@/components/progress-bar/ProgressBar';
+
 import './main-layout.css';
-
-import Header from '../../components/header/Header';
-import ProgressBar from '../../components/progress-bar/ProgressBar';
-
 const Main: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <section className="layout">

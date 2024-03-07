@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import md5 from 'md5';
 
-import { Character } from '../../modules/characters/domain/Character';
-import { createCharacterApiRepository } from '../../modules/characters/service/CharacterApiService';
-import { getAllCharacters } from '../../modules/characters/application/getAll';
+import { Character } from '@/modules/characters/domain/Character';
+import { createCharacterApiRepository } from '@/modules/characters/service/CharacterApiService';
+import { getAllCharacters } from '@/modules/characters/application/getAll';
 
 const characterRepository = createCharacterApiRepository();
 

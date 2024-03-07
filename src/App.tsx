@@ -2,7 +2,7 @@ import { Route, Switch } from 'wouter';
 
 import './App.css';
 
-import { Home, Details } from './views/pages';
+import { Home, Details } from '@/views/pages';
 
 function App() {
   return (
