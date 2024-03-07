@@ -17,6 +17,7 @@ export interface CharacterRepository {
   getAll: ({
     hasher,
     params,
-  }: GetAllParams) => Promise<MarvelResponseWrapper<Character>>;
-  getAllByName?: () => Promise<MarvelResponseWrapper<Character>>;
+  }: GetAllParams) => Promise<MarvelResponseWrapper<Character[]>>;
+  getAllByName?: () => Promise<MarvelResponseWrapper<Character[]>>;
+  getById: (characterId: number) => Promise<MarvelResponseWrapper<Character[]>>;
 }

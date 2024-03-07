@@ -10,7 +10,7 @@ interface MarvelResponseContainer<DataContainer>
   limit: number;
   total: number;
   count: number;
-  results: DataContainer[];
+  results: DataContainer;
 }
 
 export interface MarvelResponseWrapper<DataContainer> {

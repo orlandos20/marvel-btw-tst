@@ -7,24 +7,31 @@ import './character-card.css';
 interface CharacterCardProps {
   loading?: boolean;
   character?: Character;
+  loadCharacterInfo?: (characterId: number) => void;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({
   character,
   loading,
+  loadCharacterInfo,
 }) => {
   const [, setLocation] = useLocation();
 
   const handleClick = async () => {
-    if (!document.startViewTransition) {
-      setLocation(`/characters/${character?.id}`);
-    }
-    const transition = document.startViewTransition(() => {
-      flushSync(() => {
+    if (character?.id) {
+      if (!document.startViewTransition) {
         setLocation(`/characters/${character?.id}`);
+      }
+      const transition = document.startViewTransition(async () => {
+        if (loadCharacterInfo && typeof loadCharacterInfo === 'function') {
+          await loadCharacterInfo(character?.id);
+        }
+        flushSync(() => {
+          setLocation(`/characters/${character?.id}`);
+        });
       });
-    });
-    await transition.finished;
+      await transition.finished;
+    }
   };
 
   return (

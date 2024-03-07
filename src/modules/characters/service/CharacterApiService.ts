@@ -1,6 +1,7 @@
 import {
   CharacterRepository,
   GetAllParams,
+  Hasher,
 } from '@/modules/characters/domain/CharacterRepository';
 
 interface ServiceOptions {
@@ -10,15 +11,10 @@ interface ServiceOptions {
 export const createCharacterApiRepository = ({
   requester = window.fetch,
 }: ServiceOptions = {}): CharacterRepository => {
-  const getAll = async ({
-    hasher,
-    params = {
-      limit: 50,
-      offset: 10,
-    },
-  }: GetAllParams) => {
-    const ts = Date.now();
-    const hashParams = new URLSearchParams({
+  const ts = Date.now();
+
+  const buildHashParams = (hasher: Hasher): URLSearchParams => {
+    return new URLSearchParams({
       ts: `${ts}`,
       apikey: '40c33ac9e8cbe259bb9691b2a0fe2ce9',
       hash: hasher(
@@ -27,6 +23,16 @@ export const createCharacterApiRepository = ({
           '40c33ac9e8cbe259bb9691b2a0fe2ce9'
       ),
     });
+  };
+
+  const getAll = async ({
+    hasher,
+    params = {
+      limit: 50,
+      offset: 10,
+    },
+  }: GetAllParams) => {
+    const hashParams = buildHashParams(hasher);
     const customParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) =>
       customParams.append(key, value?.toString())
@@ -45,7 +51,22 @@ export const createCharacterApiRepository = ({
     throw parsedResponse;
   };
 
+  const getById = async (characterId: number) => {
+    const response = await requester(
+      `https://gateway.marvel.com:443/v1/public/characters/${characterId}?apikey=40c33ac9e8cbe259bb9691b2a0fe2ce9`
+    );
+
+    const parsedResponse = await response.json();
+
+    if (parsedResponse.status === 'Ok') {
+      return parsedResponse;
+    }
+
+    throw parsedResponse;
+  };
+
   return {
     getAll,
+    getById,
   };
 };

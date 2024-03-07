@@ -10,11 +10,11 @@ export const getAllCharacters = (
 ): (({
   hasher,
   params,
-}: GetAllParams) => Promise<MarvelResponseWrapper<Character>>) => {
+}: GetAllParams) => Promise<MarvelResponseWrapper<Character[]>>) => {
   return async ({
     hasher,
     params,
-  }: GetAllParams): Promise<MarvelResponseWrapper<Character>> => {
+  }: GetAllParams): Promise<MarvelResponseWrapper<Character[]>> => {
     return await characterRepository.getAll({ hasher, params });
   };
 };
