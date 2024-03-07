@@ -28,7 +28,7 @@ export type Character = {
   modified?: Date;
   resourceURI?: string;
   urls: MarvelUrl[];
-  thumbnail?: {
+  thumbnail: {
     path: string;
     extension: string;
   };
