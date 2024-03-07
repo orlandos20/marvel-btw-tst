@@ -25,6 +25,7 @@
       "@/src/*": ["./src/*"],
       "@/modules/*": ["./src/modules/*"],
       "@/hooks/*": ["./src/hooks/*"],
+      "@/contexts/*": ["./src/contexts/*"],
       "@/views/*": ["./src/views/*"],
       "@/components/*": ["./src/views/components/*"],
       "@/types/*": ["./src/types/*"],

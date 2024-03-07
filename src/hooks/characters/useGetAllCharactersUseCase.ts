@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import md5 from 'md5';
 
-import { Character } from '@/modules/characters/domain/Character';
 import { createCharacterApiRepository } from '@/modules/characters/service/CharacterApiService';
 import { getAllCharacters } from '@/modules/characters/application/getAll';
+import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
 
 const characterRepository = createCharacterApiRepository();
 
@@ -13,7 +13,10 @@ const params = {
 };
 
 export const useGetAllCharactersUseCase = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const {
+    state: { characters },
+    dispatch,
+  } = useCharacterContext();
 
   const retrieveAllCharacters = async () => {
     const results = await getAllCharacters(characterRepository)({
@@ -21,8 +24,13 @@ export const useGetAllCharactersUseCase = () => {
       params,
     });
 
-    if (results) {
-      setCharacters(results?.data?.results);
+    if (results && results?.data?.results?.length > 0) {
+      dispatch({
+        type: 'setCharacters',
+        payload: {
+          characters: results.data.results,
+        },
+      });
     }
   };
 

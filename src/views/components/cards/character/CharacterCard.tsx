@@ -3,11 +3,12 @@ import { flushSync } from 'react-dom';
 
 import { Character } from '@/modules/characters/domain/Character';
 import './character-card.css';
+import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
 
 interface CharacterCardProps {
   loading?: boolean;
   character?: Character;
-  loadCharacterInfo?: (characterId: number) => void;
+  loadCharacterInfo?: (characterId: number) => Promise<Character | undefined>;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({
@@ -15,6 +16,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   loading,
   loadCharacterInfo,
 }) => {
+  const { dispatch } = useCharacterContext();
+
   const [, setLocation] = useLocation();
 
   const handleClick = async () => {
@@ -24,7 +27,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       }
       const transition = document.startViewTransition(async () => {
         if (loadCharacterInfo && typeof loadCharacterInfo === 'function') {
-          await loadCharacterInfo(character?.id);
+          const characterData = await loadCharacterInfo(character?.id);
+          if (characterData) {
+            dispatch({
+              type: 'setCharacterData',
+              payload: {
+                characterData,
+              },
+            });
+          }
         }
         flushSync(() => {
           setLocation(`/characters/${character?.id}`);
