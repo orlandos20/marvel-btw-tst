@@ -55,3 +55,40 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(0, 60%, 50%);
 }
+
+@supports (view-transition-name: none) {
+  ::view-transition-group(layout-content) {
+    animation-duration: 1s;
+    animation-timing-function: ease;
+  }
+
+  ::view-transition-old(layout-content) {
+    animation: toDown 0.15s cubic-bezier(0.45, 0.45, 0.74, 0.73) both;
+  }
+
+  ::view-transition-new(layout-content) {
+    animation: fromUp 0.45s cubic-bezier(0.45, 0.45, 0.74, 0.73) 0.75s both;
+  }
+}
+
+@keyframes toDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+}
+
+@keyframes fromUp {
+  from {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
