@@ -6,13 +6,37 @@ import { useLocation } from 'wouter';
 import { MainLayout } from '@/views/layouts';
 import DetailsHero from '@/components/details-hero-section/DetailsHero';
 import Slider from '@/components/slider/Slider';
+import { useGetCharacterUseCase } from '@/src/hooks/characters/useGetCharacterUseCase';
+import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
 
 interface DetailsProps {
   characterId: string;
 }
 
 const Details: React.FC<DetailsProps> = ({ characterId }) => {
+  const {
+    state: { characterData },
+    dispatch,
+  } = useCharacterContext();
+  const { retrieveCharacter } = useGetCharacterUseCase();
   const [, setLocation] = useLocation();
+
+  const handleGetCharacterData = async () => {
+    const characterInfo = await retrieveCharacter(parseInt(characterId, 10));
+
+    if (characterInfo) {
+      dispatch({
+        type: 'setCharacterData',
+        payload: {
+          characterData: characterInfo,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!Object.keys(characterData).length) handleGetCharacterData();
+  }, []);
 
   const handleBackNavigation = async (e: Event) => {
     e.preventDefault();
