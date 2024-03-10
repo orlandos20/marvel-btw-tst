@@ -1,7 +1,7 @@
 import { State, initialState } from './charactersContext';
 
 export type Action = {
-  type: 'setCharacters' | 'setCharacterData';
+  type: 'loading' | 'setCharacters' | 'setCharacterData';
   payload: {
     [K in keyof State]?: State[K];
   };
@@ -12,6 +12,12 @@ export const characterReducer = (
   action: Action
 ): State => {
   switch (action.type) {
+    case 'loading': {
+      return {
+        ...state,
+        loading: action.payload.loading,
+      };
+    }
     case 'setCharacters': {
       return {
         ...state,

@@ -22,12 +22,27 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 
   const handleClick = async () => {
     if (character?.id) {
-      if (!document.startViewTransition) {
+      let characterData: undefined | Character;
+      if (loadCharacterInfo && typeof loadCharacterInfo === 'function') {
+        dispatch({
+          type: 'loading',
+          payload: {
+            loading: true,
+          },
+        });
+        characterData = await loadCharacterInfo(character?.id);
+      }
+      if (!document.startViewTransition && characterData) {
+        dispatch({
+          type: 'loading',
+          payload: {
+            loading: false,
+          },
+        });
         setLocation(`/characters/${character?.id}`);
       }
       const transition = document.startViewTransition(async () => {
-        if (loadCharacterInfo && typeof loadCharacterInfo === 'function') {
-          const characterData = await loadCharacterInfo(character?.id);
+        flushSync(() => {
           if (characterData) {
             dispatch({
               type: 'setCharacterData',
@@ -35,12 +50,17 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
                 characterData,
               },
             });
+            setLocation(`/characters/${character?.id}`);
+            dispatch({
+              type: 'loading',
+              payload: {
+                loading: false,
+              },
+            });
           }
-        }
-        flushSync(() => {
-          setLocation(`/characters/${character?.id}`);
         });
       });
+
       await transition.finished;
     }
   };

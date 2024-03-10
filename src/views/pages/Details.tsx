@@ -15,7 +15,7 @@ interface DetailsProps {
 
 const Details: React.FC<DetailsProps> = ({ characterId }) => {
   const {
-    state: { characterData },
+    state: { characterData, loading },
     dispatch,
   } = useCharacterContext();
   const { retrieveCharacter } = useGetCharacterUseCase();
@@ -23,8 +23,13 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
 
   const handleGetCharacterData = async () => {
     const characterInfo = await retrieveCharacter(parseInt(characterId, 10));
-
     if (characterInfo) {
+      dispatch({
+        type: 'loading',
+        payload: {
+          loading: false,
+        },
+      });
       dispatch({
         type: 'setCharacterData',
         payload: {
@@ -35,7 +40,17 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
   };
 
   useEffect(() => {
-    if (!Object.keys(characterData).length) handleGetCharacterData();
+    if (!characterData.name) {
+      if (!loading) {
+        dispatch({
+          type: 'loading',
+          payload: {
+            loading: true,
+          },
+        });
+      }
+      handleGetCharacterData();
+    }
   }, []);
 
   const handleBackNavigation = async (e: Event) => {

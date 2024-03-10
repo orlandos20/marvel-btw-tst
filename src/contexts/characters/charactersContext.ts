@@ -4,11 +4,13 @@ import { createContext } from 'react';
 import { Action } from './charactersReducer';
 
 export interface State {
+  loading?: boolean;
   characters: Character[];
   characterData: Character;
 }
 
 export const initialState: State = {
+  loading: false,
   characters: [],
   characterData: {} as Character,
 };
