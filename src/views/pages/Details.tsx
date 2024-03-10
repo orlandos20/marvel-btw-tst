@@ -107,7 +107,6 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
             <ComicCard key={index} loading />
           ))}
       </Slider>
-      <div>{characterId}</div>
     </MainLayout>
   );
 };

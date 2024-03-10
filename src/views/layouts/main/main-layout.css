@@ -6,4 +6,5 @@
 
 .layout--content {
   view-transition-name: layout-content;
+  padding-bottom: 5%;
 }
