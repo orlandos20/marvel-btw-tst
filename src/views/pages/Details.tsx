@@ -10,6 +10,8 @@ import { useGetCharacterUseCase } from '@/src/hooks/characters/useGetCharacterUs
 import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
 import { useGetComicsByCharacterId } from '@/src/hooks/comics/useGetComicsByCharacterId';
 
+import { ComicCard } from '@/components/cards';
+
 interface DetailsProps {
   characterId: string;
 }
@@ -89,7 +91,22 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
   return (
     <MainLayout>
       <DetailsHero />
-      <Slider />
+      <Slider>
+        {characterData?.comics?.length > 0 &&
+          characterData?.comics?.map((comicData) => (
+            <ComicCard
+              key={comicData.id}
+              comicData={comicData}
+              loading={false}
+            />
+          ))}
+
+        {!characterData?.comics?.length &&
+          loading &&
+          Array.from(Array(20).keys()).map((index) => (
+            <ComicCard key={index} loading />
+          ))}
+      </Slider>
       <div>{characterId}</div>
     </MainLayout>
   );

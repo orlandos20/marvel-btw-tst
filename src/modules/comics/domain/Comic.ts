@@ -27,4 +27,8 @@ export interface Comic {
   characters?: string;
   stories?: string;
   events?: string;
+  thumbnail?: {
+    path: string;
+    extension: string;
+  };
 }

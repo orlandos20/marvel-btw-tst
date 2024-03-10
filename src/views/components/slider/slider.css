@@ -5,17 +5,28 @@ h3 {
 }
 
 .slider {
-  display: flex;
   max-width: var(--details-container-max-w);
   margin: var(--desktop-layout-padding) auto;
-  overflow: hidden;
 }
 
-.slider--container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.slick-dots {
+  display: flex !important;
+  & > .slick-active {
+    width: 25%;
+    height: 5px;
+    background-color: var(--marvel-red);
+  }
+  & > li {
+    list-style: none;
+    width: 25%;
+    margin: 0;
+    & > button {
+      width: 100%;
+      &::before {
+        content: '';
+      }
+    }
+  }
 }
 
 .slider--title {
@@ -23,13 +34,13 @@ h3 {
   margin-bottom: calc(var(--desktop-layout-padding) / 2);
 }
 
-.slider--container__slides {
+.slider--container {
   width: 100%;
-  overflow-x: scroll;
   & > ul {
-    display: flex;
+    display: flex !important;
     gap: 16px;
-    padding-inline: 0;
+    padding: 0;
+    margin: 0;
     & > li {
       list-style: none;
     }

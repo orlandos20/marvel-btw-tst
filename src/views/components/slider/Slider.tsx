@@ -1,43 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { PropsWithChildren } from 'react';
+import SlickSlider from 'react-slick';
 
-import CharacterCard from '@/components/cards/character/CharacterCard';
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './slider.css';
 
-const Slider = () => {
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  const handleSliderHovered = (e: WheelEvent) => {
-    if (Math.sign(e.deltaY) && sliderRef?.current) {
-      sliderRef?.current?.scroll({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore-next-line
-        left: sliderRef?.current.firstChild?.clientWidth * 2,
-        behavior: 'smooth',
-      });
-    }
-
-    if (Math.sign(e.deltaY) === -1) {
-      sliderRef?.current?.scroll({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore-next-line
-        left: -sliderRef?.current?.firstChild?.clientWidth * 2,
-        behavior: 'smooth',
-      });
-    }
-
-    e.stopPropagation();
-    e.preventDefault();
+const Slider: React.FC<PropsWithChildren> = ({ children }) => {
+  const settings = {
+    dots: true,
+    dotsClass: 'slick-dots slick-thumb',
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
   };
-
-  useEffect(() => {
-    if (sliderRef?.current) {
-      sliderRef?.current?.addEventListener('wheel', handleSliderHovered);
-    }
-
-    return () =>
-      sliderRef?.current?.removeEventListener('wheel', handleSliderHovered);
-  }, []);
 
   return (
     <div className="slider">
@@ -45,53 +20,7 @@ const Slider = () => {
         <div className="slider--title">
           <h3 id="sliderTitle">COMICS</h3>
         </div>
-        <div
-          className="slider--container__slides"
-          role="slider"
-          ref={sliderRef}
-        >
-          <ul>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-            <li>
-              <CharacterCard />
-            </li>
-          </ul>
-        </div>
+        <SlickSlider {...settings}>{children}</SlickSlider>
       </section>
     </div>
   );
