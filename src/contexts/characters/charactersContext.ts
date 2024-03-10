@@ -7,12 +7,14 @@ export interface State {
   loading?: boolean;
   characters: Character[];
   characterData: Character;
+  searchTerms: string;
 }
 
 export const initialState: State = {
   loading: false,
   characters: [],
   characterData: {} as Character,
+  searchTerms: '',
 };
 
 export const CharactersContext = createContext<{

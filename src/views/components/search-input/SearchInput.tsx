@@ -1,15 +1,20 @@
+import { InputHTMLAttributes } from 'react';
 import './search-input.css';
 
-type SearchInputProps = {
+interface SearchInputProps
+  extends Partial<InputHTMLAttributes<HTMLInputElement>> {
   name: string;
-  placeholder?: string;
+  value?: string;
+  placeholder: string;
   searchResultsLegend?: string;
-};
+}
 
 const SearchInput: React.FC<SearchInputProps> = ({
   name,
+  value,
   placeholder,
   searchResultsLegend,
+  ...rest
 }) => {
   return (
     <>
@@ -31,7 +36,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
         type="search"
         id={name}
         name={name}
+        defaultValue={value || ''}
         placeholder={placeholder || 'Search'}
+        {...rest}
       />
       {searchResultsLegend && <span>{searchResultsLegend}</span>}
     </>

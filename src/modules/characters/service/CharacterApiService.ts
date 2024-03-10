@@ -1,6 +1,6 @@
 import {
   CharacterRepository,
-  GetAllParams,
+  GetParams,
   Hasher,
 } from '@/modules/characters/domain/CharacterRepository';
 
@@ -31,7 +31,33 @@ export const createCharacterApiRepository = ({
       limit: 50,
       offset: 10,
     },
-  }: GetAllParams) => {
+  }: GetParams) => {
+    const hashParams = buildHashParams(hasher);
+    const customParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) =>
+      customParams.append(key, value?.toString())
+    );
+
+    const response = await requester(
+      `https://gateway.marvel.com:443/v1/public/characters?${customParams}&${hashParams}`
+    );
+
+    const parsedResponse = await response.json();
+
+    if (parsedResponse.status === 'Ok') {
+      return parsedResponse;
+    }
+
+    throw parsedResponse;
+  };
+
+  const search = async ({
+    hasher,
+    params = {
+      limit: 50,
+      offset: 10,
+    },
+  }: GetParams) => {
     const hashParams = buildHashParams(hasher);
     const customParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) =>
@@ -67,6 +93,7 @@ export const createCharacterApiRepository = ({
 
   return {
     getAll,
+    search,
     getById,
   };
 };

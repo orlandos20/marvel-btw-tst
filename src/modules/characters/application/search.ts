@@ -5,7 +5,7 @@ import {
 import { Character } from '@/modules/characters/domain/Character';
 import { MarvelResponseWrapper } from '@/types/marvelApiResponseTypes';
 
-export const getAllCharacters = (
+export const searchCharacters = (
   characterRepository: CharacterRepository
 ): (({
   hasher,

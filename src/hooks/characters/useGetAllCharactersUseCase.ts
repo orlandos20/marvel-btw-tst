@@ -12,36 +12,54 @@ const params = {
   offset: 10,
 };
 
+export type UseGetAllCharactersUseCase = ReturnType<
+  typeof useGetAllCharactersUseCase
+>;
+
 export const useGetAllCharactersUseCase = () => {
   const {
-    state: { characters },
+    state: { characters, loading },
     dispatch,
   } = useCharacterContext();
 
   const retrieveAllCharacters = async () => {
+    dispatch({
+      type: 'loading',
+      payload: {
+        loading: true,
+      },
+    });
     const results = await getAllCharacters(characterRepository)({
       hasher: md5,
       params,
     });
 
-    if (results && results?.data?.results?.length > 0) {
+    if (results && results?.data?.results) {
       dispatch({
         type: 'setCharacters',
         payload: {
           characters: results.data.results,
         },
       });
+      dispatch({
+        type: 'loading',
+        payload: {
+          loading: false,
+        },
+      });
     }
   };
 
   useEffect(() => {
-    if (!characters?.length) {
+    if (!characters?.length && !loading) {
       retrieveAllCharacters();
     }
   }, []);
 
   return {
+    loading,
     characters,
+    retrieveAllCharacters,
     ...params,
   };
 };

@@ -6,28 +6,24 @@ import SearchInput from '@/components/search-input/SearchInput';
 import { useGetAllCharactersUseCase } from '@/hooks/characters/useGetAllCharactersUseCase';
 import { useGetCharacterUseCase } from '@/hooks/characters/useGetCharacterUseCase';
 import { Character } from '@/modules/characters/domain/Character';
-import { FormEvent } from 'react';
+import { useSearchCharactersUseCase } from '@/src/hooks/characters/useSearchCharactersUseCase';
 
 const Home = () => {
-  const { characters, limit } = useGetAllCharactersUseCase();
+  const { limit, loading, characters, retrieveAllCharacters } =
+    useGetAllCharactersUseCase();
+  const { onInputChange, submitHandler, searchTerms } =
+    useSearchCharactersUseCase(retrieveAllCharacters);
   const { retrieveCharacter } = useGetCharacterUseCase();
-
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formValues = new FormData(e.target as HTMLFormElement);
-    const formValuesAsParams = new URLSearchParams(
-      formValues as unknown as Record<string, string>
-    ).toString();
-    console.log('formValues --> ', formValuesAsParams);
-  };
 
   return (
     <MainLayout>
       <form onSubmit={submitHandler}>
         <SearchInput
           name="nameStartsWith"
+          value={searchTerms}
           placeholder="Search a Character..."
           searchResultsLegend={`${characters?.length} results`}
+          onInput={onInputChange}
         />
       </form>
       <Grid>
@@ -41,6 +37,7 @@ const Home = () => {
           ))}
 
         {!characters?.length &&
+          loading &&
           Array.from(Array(limit).keys()).map((index) => (
             <CharacterCard key={index} loading />
           ))}
