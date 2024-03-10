@@ -1,7 +1,10 @@
 .cards-grid {
   padding-inline: var(--desktop-layout-padding);
+  @media (max-width: 768px) {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
   margin-top: calc(var(--desktop-layout-padding) / 2);
 }

@@ -1,7 +1,14 @@
 .header {
   max-height: 84px;
   background-color: var(--main-text-color);
-  padding: 16px 48px 16px 48px;
+  padding-inline: var(--desktop-layout-padding);
+  padding-block: calc(var(--desktop-layout-padding) / 3);
+  @media (max-width: 768px) {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
+  @media (max-width: 768px) {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
   color: #fff;
   display: flex;
   justify-content: space-between;

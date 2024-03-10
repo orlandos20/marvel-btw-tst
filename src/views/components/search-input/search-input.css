@@ -1,6 +1,9 @@
 form {
   padding-inline: var(--desktop-layout-padding);
   padding-block: calc(var(--desktop-layout-padding) / 2);
+  @media (max-width: 768px) {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
 }
 
 label {
