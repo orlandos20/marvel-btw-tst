@@ -7,6 +7,27 @@ h3 {
 .slider {
   max-width: var(--details-container-max-w);
   margin: var(--desktop-layout-padding) auto;
+  @media (max-width: 600px) {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
+}
+
+.slider--title {
+  font-size: 2.5rem;
+  margin-bottom: calc(var(--desktop-layout-padding) / 2);
+}
+
+.slider--container {
+  width: 100%;
+  & > ul {
+    display: flex !important;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    & > li {
+      list-style: none;
+    }
+  }
 }
 
 .slick-dots {
@@ -25,24 +46,6 @@ h3 {
       &::before {
         content: '';
       }
-    }
-  }
-}
-
-.slider--title {
-  font-size: 2.5rem;
-  margin-bottom: calc(var(--desktop-layout-padding) / 2);
-}
-
-.slider--container {
-  width: 100%;
-  & > ul {
-    display: flex !important;
-    gap: 16px;
-    padding: 0;
-    margin: 0;
-    & > li {
-      list-style: none;
     }
   }
 }

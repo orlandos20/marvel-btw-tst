@@ -12,6 +12,56 @@ const Slider: React.FC<PropsWithChildren> = ({ children }) => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          inifinite: true,
+          centerMode: true,
+          dots: true,
+          arrows: false,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 1,
+          centerPadding: '60px',
+        },
+      },
+      {
+        breakpoint: 520,
+        settings: {
+          inifinite: true,
+          centerMode: true,
+          dots: true,
+          arrows: false,
+          dotsClass: 'slick-dots slick-thumb',
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: '60px',
+        },
+      },
+      {
+        breakpoint: 360,
+        settings: {
+          inifinite: true,
+          centerMode: true,
+          dots: true,
+          arrows: false,
+          dotsClass: 'slick-dots slick-thumb',
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: '45px',
+        },
+      },
+    ],
   };
 
   return (

@@ -24,3 +24,20 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .hero-section {
+    width: 100%;
+    background-color: var(--main-text-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-section--container__image {
+    width: 100%;
+  }
+  .hero-section--container__description {
+    padding-inline: calc(var(--desktop-layout-padding) / 3);
+  }
+}
