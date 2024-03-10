@@ -1,25 +1,10 @@
-type MarvelUrl = {
-  type: string;
-  url: string;
-};
-
-interface ProductSummary {
-  resourceURI?: string;
-  name?: string;
-  type?: string;
-}
-
-interface MarvelProductList<ProductSummary> {
-  available: number;
-  returned: number;
-  collectionURI: number;
-  items: ProductSummary[];
-}
-
-interface MarverComicList extends MarvelProductList<ProductSummary> {}
-interface MarvelStoryList extends MarvelProductList<ProductSummary> {}
-interface MarvelEventList extends MarvelProductList<ProductSummary> {}
-interface MarvelSeriesList extends MarvelProductList<ProductSummary> {}
+import {
+  MarvelEventList,
+  MarvelSeriesList,
+  MarvelStoryList,
+  MarvelUrl,
+  MarverComicList,
+} from '@/src/types/marvelApiResponseTypes';
 
 export type Character = {
   id: number;

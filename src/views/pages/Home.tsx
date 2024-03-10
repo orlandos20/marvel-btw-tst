@@ -7,13 +7,69 @@ import { useGetAllCharactersUseCase } from '@/hooks/characters/useGetAllCharacte
 import { useGetCharacterUseCase } from '@/hooks/characters/useGetCharacterUseCase';
 import { Character } from '@/modules/characters/domain/Character';
 import { useSearchCharactersUseCase } from '@/src/hooks/characters/useSearchCharactersUseCase';
+import { flushSync } from 'react-dom';
+import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
+import { useLocation } from 'wouter';
+import { useGetComicsByCharacterId } from '@/src/hooks/comics/useGetComicsByCharacterId';
 
 const Home = () => {
-  const { limit, loading, characters, retrieveAllCharacters } =
-    useGetAllCharactersUseCase();
+  const [, setLocation] = useLocation();
+  const { limit, retrieveAllCharacters } = useGetAllCharactersUseCase();
   const { onInputChange, submitHandler, searchTerms } =
     useSearchCharactersUseCase(retrieveAllCharacters);
   const { retrieveCharacter } = useGetCharacterUseCase();
+  const { retrieveComicsByCharacterId } = useGetComicsByCharacterId();
+
+  const {
+    state: { loading, characters },
+    dispatch,
+  } = useCharacterContext();
+
+  const handleClick = async (characterId: number) => {
+    if (characterId) {
+      dispatch({
+        type: 'loading',
+        payload: {
+          loading: true,
+        },
+      });
+      const characterInfo = await retrieveCharacter(characterId);
+      const characterComics = await retrieveComicsByCharacterId(characterId);
+      if (!document.startViewTransition && characterInfo) {
+        dispatch({
+          type: 'loading',
+          payload: {
+            loading: false,
+          },
+        });
+        setLocation(`/characters/${characterId}`);
+      }
+      const transition = document.startViewTransition(async () => {
+        flushSync(() => {
+          if (characterInfo) {
+            dispatch({
+              type: 'setCharacterData',
+              payload: {
+                characterData: {
+                  character: characterInfo,
+                  comics: characterComics,
+                },
+              },
+            });
+            setLocation(`/characters/${characterId}`);
+            dispatch({
+              type: 'loading',
+              payload: {
+                loading: false,
+              },
+            });
+          }
+        });
+      });
+
+      await transition.finished;
+    }
+  };
 
   return (
     <MainLayout>
@@ -32,7 +88,7 @@ const Home = () => {
             <CharacterCard
               key={character?.id}
               character={character}
-              loadCharacterInfo={retrieveCharacter}
+              handleClick={handleClick}
             />
           ))}
 

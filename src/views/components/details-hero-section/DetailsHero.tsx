@@ -4,14 +4,16 @@ import { Character } from '@/src/modules/characters/domain/Character';
 
 const DetailsHero = () => {
   const {
-    state: { characterData },
+    state: {
+      characterData: { character },
+    },
   } = useCharacterContext();
 
   const {
     name,
     description,
     thumbnail = {} as Character['thumbnail'],
-  } = characterData;
+  } = character;
   const { path = '', extension = '' } = thumbnail;
 
   return (

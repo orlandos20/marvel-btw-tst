@@ -8,6 +8,7 @@ import DetailsHero from '@/components/details-hero-section/DetailsHero';
 import Slider from '@/components/slider/Slider';
 import { useGetCharacterUseCase } from '@/src/hooks/characters/useGetCharacterUseCase';
 import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
+import { useGetComicsByCharacterId } from '@/src/hooks/comics/useGetComicsByCharacterId';
 
 interface DetailsProps {
   characterId: string;
@@ -19,11 +20,23 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
     dispatch,
   } = useCharacterContext();
   const { retrieveCharacter } = useGetCharacterUseCase();
+  const { retrieveComicsByCharacterId } = useGetComicsByCharacterId();
   const [, setLocation] = useLocation();
+
+  const handleGetCharacterComics = async () => {
+    const characterComics = await retrieveComicsByCharacterId(
+      parseInt(characterId, 10)
+    );
+
+    if (characterComics) {
+      return characterComics;
+    }
+  };
 
   const handleGetCharacterData = async () => {
     const characterInfo = await retrieveCharacter(parseInt(characterId, 10));
-    if (characterInfo) {
+    const characterComics = await handleGetCharacterComics();
+    if (characterInfo && characterComics) {
       dispatch({
         type: 'loading',
         payload: {
@@ -33,14 +46,17 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
       dispatch({
         type: 'setCharacterData',
         payload: {
-          characterData: characterInfo,
+          characterData: {
+            character: characterInfo,
+            comics: characterComics,
+          },
         },
       });
     }
   };
 
   useEffect(() => {
-    if (!characterData.name) {
+    if (!characterData?.character?.name) {
       if (!loading) {
         dispatch({
           type: 'loading',
