@@ -72,7 +72,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   position: relative;
-  min-width: 130px;
   min-height: 20px;
 }
 

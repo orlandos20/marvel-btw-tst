@@ -45,8 +45,8 @@ const DetailsHero = () => {
               <div
                 onClick={(e) => handleFavorite && handleFavorite(e, character)}
               >
-                {!isFavorite && <FavUnselected className="svg unfilled" />}
-                {isFavorite && <FavSelected className="svg filled" />}
+                {!isFavorite && <FavUnselected className="hero-svg unfilled" />}
+                {isFavorite && <FavSelected className="hero-svg filled" />}
               </div>
             </div>
           )}

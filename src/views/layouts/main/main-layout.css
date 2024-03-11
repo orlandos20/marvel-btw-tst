@@ -7,5 +7,8 @@
 .layout--content {
   position: relative;
   view-transition-name: layout-content;
-  padding-bottom: 5%;
+  min-height: 80vh;
+  @media (max-width: 600px) {
+    min-height: 30vh;
+  }
 }
