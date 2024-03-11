@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import { useLocation } from 'wouter';
 
@@ -87,6 +88,12 @@ const Home = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!characters?.length && !loading) {
+      retrieveAllCharacters();
+    }
+  }, []);
 
   return (
     <MainLayout>

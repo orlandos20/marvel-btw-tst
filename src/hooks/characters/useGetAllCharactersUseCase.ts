@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import md5 from 'md5';
 
 import { createCharacterApiRepository } from '@/modules/characters/service/CharacterApiService';
@@ -18,11 +18,11 @@ export type UseGetAllCharactersUseCase = ReturnType<
 
 export const useGetAllCharactersUseCase = () => {
   const {
-    state: { characters, loading, attributionData },
+    state: { attributionData },
     dispatch,
   } = useCharacterContext();
 
-  const retrieveAllCharacters = async () => {
+  const retrieveAllCharacters = useCallback(async () => {
     dispatch({
       type: 'loading',
       payload: {
@@ -58,12 +58,6 @@ export const useGetAllCharactersUseCase = () => {
           },
         });
       }
-    }
-  };
-
-  useEffect(() => {
-    if (!characters?.length && !loading) {
-      retrieveAllCharacters();
     }
   }, []);
 
