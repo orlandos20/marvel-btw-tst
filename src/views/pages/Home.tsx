@@ -11,6 +11,7 @@ import { flushSync } from 'react-dom';
 import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
 import { useLocation } from 'wouter';
 import { useGetComicsByCharacterId } from '@/src/hooks/comics/useGetComicsByCharacterId';
+import { Comic } from '@/src/modules/comics/domain/Comic';
 
 const Home = () => {
   const [, setLocation] = useLocation();
@@ -25,6 +26,27 @@ const Home = () => {
     dispatch,
   } = useCharacterContext();
 
+  const updateState = (characterInfo: Character, characterComics: Comic[]) => {
+    if (characterInfo) {
+      dispatch({
+        type: 'setCharacterData',
+        payload: {
+          characterData: {
+            character: characterInfo,
+            comics: characterComics,
+          },
+        },
+      });
+      setLocation(`/characters/${characterInfo.id}`);
+      dispatch({
+        type: 'loading',
+        payload: {
+          loading: false,
+        },
+      });
+    }
+  };
+
   const handleClick = async (characterId: number) => {
     if (characterId) {
       dispatch({
@@ -35,39 +57,25 @@ const Home = () => {
       });
       const characterInfo = await retrieveCharacter(characterId);
       const characterComics = await retrieveComicsByCharacterId(characterId);
-      if (!document.startViewTransition && characterInfo) {
-        dispatch({
-          type: 'loading',
-          payload: {
-            loading: false,
-          },
-        });
-        setLocation(`/characters/${characterId}`);
+      if (!document?.startViewTransition && characterInfo) {
+        if (characterInfo) {
+          return updateState(characterInfo, characterComics);
+        }
       }
-      const transition = document.startViewTransition(async () => {
-        flushSync(() => {
-          if (characterInfo) {
-            dispatch({
-              type: 'setCharacterData',
-              payload: {
-                characterData: {
-                  character: characterInfo,
-                  comics: characterComics,
-                },
-              },
-            });
-            setLocation(`/characters/${characterId}`);
-            dispatch({
-              type: 'loading',
-              payload: {
-                loading: false,
-              },
-            });
-          }
-        });
-      });
 
-      await transition.finished;
+      if (document?.startViewTransition && characterInfo) {
+        const transition =
+          document &&
+          document?.startViewTransition(async () => {
+            flushSync(() => {
+              if (characterInfo) {
+                return updateState(characterInfo, characterComics);
+              }
+            });
+          });
+
+        await transition.finished;
+      }
     }
   };
 
