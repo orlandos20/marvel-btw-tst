@@ -1,31 +1,36 @@
+import { flushSync } from 'react-dom';
+import { useLocation } from 'wouter';
+
 import { MainLayout } from '@/views/layouts';
 import { CharacterCard } from '@/components/cards';
 import Grid from '@/components/grid/Grid';
 import SearchInput from '@/components/search-input/SearchInput';
 
-import { useGetAllCharactersUseCase } from '@/hooks/characters/useGetAllCharactersUseCase';
-import { useGetCharacterUseCase } from '@/hooks/characters/useGetCharacterUseCase';
 import { Character } from '@/modules/characters/domain/Character';
-import { useSearchCharactersUseCase } from '@/src/hooks/characters/useSearchCharactersUseCase';
-import { flushSync } from 'react-dom';
-import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
-import { useLocation } from 'wouter';
-import { useGetComicsByCharacterId } from '@/src/hooks/comics/useGetComicsByCharacterId';
 import { Comic } from '@/src/modules/comics/domain/Comic';
 
+import { useCharacterContext } from '@/contexts/characters/CharacterProvider';
+
+import { useGetAllCharactersUseCase } from '@/hooks/characters/useGetAllCharactersUseCase';
+import { useGetCharacterUseCase } from '@/hooks/characters/useGetCharacterUseCase';
+import { useSearchCharactersUseCase } from '@/hooks/characters/useSearchCharactersUseCase';
+import { useGetComicsByCharacterId } from '@/hooks/comics/useGetComicsByCharacterId';
+import { useFavouritesUseCase } from '@/hooks/characters/useFavouritesUseCase';
+
 const Home = () => {
-  const [, setLocation] = useLocation();
+  const {
+    state: { loading, characters, searchTerms },
+    dispatch,
+  } = useCharacterContext();
   const { limit, retrieveAllCharacters } = useGetAllCharactersUseCase();
-  const { onInputChange, submitHandler, searchTerms } =
-    useSearchCharactersUseCase(retrieveAllCharacters);
+  const { onInputChange, submitHandler } = useSearchCharactersUseCase(
+    retrieveAllCharacters
+  );
   const { retrieveCharacter } = useGetCharacterUseCase();
   const { retrieveComicsByCharacterId, sortComicsByDate } =
     useGetComicsByCharacterId();
-
-  const {
-    state: { loading, characters },
-    dispatch,
-  } = useCharacterContext();
+  const { handleFavorite } = useFavouritesUseCase();
+  const [, setLocation] = useLocation();
 
   const updateState = (characterInfo: Character, characterComics: Comic[]) => {
     if (characterInfo) {
@@ -99,6 +104,7 @@ const Home = () => {
               key={character?.id}
               character={character}
               handleClick={handleClick}
+              handleFavorite={handleFavorite}
             />
           ))}
 

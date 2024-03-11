@@ -84,7 +84,6 @@ export const useSearchCharactersUseCase = (
   );
 
   return {
-    searchTerms,
     submitHandler,
     onInputChange,
   };

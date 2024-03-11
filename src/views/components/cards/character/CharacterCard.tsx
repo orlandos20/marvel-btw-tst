@@ -1,16 +1,20 @@
 import { Character } from '@/modules/characters/domain/Character';
 import './character-card.css';
-
 interface CharacterCardProps {
   loading?: boolean;
   character?: Character;
   handleClick?: (characterId: number) => void;
+  handleFavorite?: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    character?: Character
+  ) => void;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({
   character,
   loading,
   handleClick,
+  handleFavorite,
 }) => {
   return (
     <div
@@ -34,7 +38,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
             {!loading && <span>{character?.name}</span>}
             {loading && <span className="text-loading"></span>}
           </div>
-          <div>❤️</div>
+          <div
+            className="fav-btn"
+            onClick={(e) => handleFavorite && handleFavorite(e, character)}
+          >
+            ❤️
+          </div>
         </div>
       </div>
     </div>

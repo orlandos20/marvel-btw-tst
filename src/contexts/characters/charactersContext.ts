@@ -1,8 +1,8 @@
-import { Character } from '@/src/modules/characters/domain/Character';
-import React from 'react';
 import { createContext } from 'react';
+
+import { Character } from '@/modules/characters/domain/Character';
 import { Action } from './charactersReducer';
-import { Comic } from '@/src/modules/comics/domain/Comic';
+import { Comic } from '@/modules/comics/domain/Comic';
 
 export interface State {
   loading?: boolean;
@@ -12,6 +12,7 @@ export interface State {
     comics: Comic[];
   };
   searchTerms: string;
+  favorites: Character[];
 }
 
 export const initialState: State = {
@@ -22,6 +23,7 @@ export const initialState: State = {
     comics: [],
   },
   searchTerms: '',
+  favorites: [],
 };
 
 export const CharactersContext = createContext<{

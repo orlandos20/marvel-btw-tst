@@ -1,8 +1,12 @@
-import { Character } from '@/src/modules/characters/domain/Character';
 import { State, initialState } from './charactersContext';
 
 export type Action = {
-  type: 'loading' | 'setCharacters' | 'searchCharacters' | 'setCharacterData';
+  type:
+    | 'loading'
+    | 'setCharacters'
+    | 'searchCharacters'
+    | 'setCharacterData'
+    | 'setFavorites';
   payload: {
     [K in keyof State]?: State[K];
   };
@@ -40,8 +44,18 @@ export const characterReducer = (
     case 'setCharacterData':
       return {
         ...state,
-        characterData: action.payload.characterData || ({} as Character),
+        characterData:
+          action.payload.characterData || ({} as State['characterData']),
+        searchTerms: '',
       };
+
+    case 'setFavorites': {
+      return {
+        ...state,
+        favorites: action.payload.favorites || state.favorites,
+        searchTerms: '',
+      };
+    }
 
     default:
       return state;
