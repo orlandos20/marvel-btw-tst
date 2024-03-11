@@ -14,3 +14,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.icon-container {
+  display: flex;
+  gap: 8px;
+}
+
+.filled {
+  height: 24px;
+  fill: var(--marvel-red);
+}

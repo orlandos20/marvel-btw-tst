@@ -36,8 +36,8 @@
   min-height: 20px;
 }
 
-.text-loading,
-.img-loading {
+.comic-card--text-loading,
+.comic-card--img-loading {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -47,8 +47,8 @@
   border-radius: unset;
 }
 
-.text-loading::after,
-.img-loading::after {
+.comic-card--text-loading::after,
+.comic-card--img-loading::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -59,13 +59,13 @@
   content: '';
 }
 
-.img-loading,
-.text-loading {
+.comic-card--img-loading,
+.comic-card--text-loading {
   background-color: #dbdbdb;
 }
 
-.img-loading::after,
-.text-loading::after {
+.comic-card--img-loading::after,
+.comic-card--text-loading::after {
   background-image: linear-gradient(
     90deg,
     #dbdbdb 0,

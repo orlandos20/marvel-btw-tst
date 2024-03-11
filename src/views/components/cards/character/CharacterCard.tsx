@@ -1,4 +1,9 @@
+import { useCharacterContext } from '@/contexts/characters/CharacterProvider';
 import { Character } from '@/modules/characters/domain/Character';
+
+import FavSelected from '@/src/assets/favSelected.svg?react';
+import FavUnselected from '@/src/assets/favUnselected.svg?react';
+
 import './character-card.css';
 interface CharacterCardProps {
   loading?: boolean;
@@ -16,6 +21,14 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   handleClick,
   handleFavorite,
 }) => {
+  const {
+    state: { favorites },
+  } = useCharacterContext();
+
+  const isFavorite = favorites.some(
+    (favorite: Character) => favorite.id === character?.id
+  );
+
   return (
     <div
       className="card"
@@ -42,7 +55,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
             className="fav-btn"
             onClick={(e) => handleFavorite && handleFavorite(e, character)}
           >
-            ❤️
+            {!isFavorite && <FavUnselected className="svg unfilled" />}
+            {isFavorite && <FavSelected className="svg filled" />}
           </div>
         </div>
       </div>

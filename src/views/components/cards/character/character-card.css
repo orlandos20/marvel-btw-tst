@@ -24,8 +24,12 @@
     z-index: 1;
   }
   &:hover .card--footer > .card--footer__divider {
-    transition: height 0.5s ease-in;
+    transition: height 0.2s ease-in-out;
     height: var(--card-footer-height);
+  }
+  &:hover .card--footer > .card--footer__description > .fav-btn > .filled {
+    transition: fill 0.25s ease-in;
+    fill: white;
   }
 }
 
@@ -124,4 +128,19 @@
   100% {
     transform: translateX(100%);
   }
+}
+
+.svg {
+  width: 12px;
+  height: 12px;
+}
+
+.filled {
+  transition: fill 0.25s ease-in;
+  fill: var(--marvel-red);
+}
+
+.unfilled {
+  transition: fill 0.25s ease-in;
+  fill: white;
 }

@@ -5,6 +5,9 @@ import MarvelLogo from '../logos/marvel-logo';
 import { useGetAllCharactersUseCase } from '@/src/hooks/characters/useGetAllCharactersUseCase';
 import { useFavouritesUseCase } from '@/hooks/characters/useFavouritesUseCase';
 
+import FavSelected from '@/src/assets/favSelected.svg?react';
+import FavUnselected from '@/src/assets/favUnselected.svg?react';
+
 import './header.css';
 
 const Header = () => {
@@ -22,8 +25,13 @@ const Header = () => {
           <MarvelLogo />
         </Link>
       </div>
-      <div onClick={showOnlyFavorites}>
-        ❤️ {favorites.length > 0 && favorites.length}
+      <div className="icon-container" onClick={showOnlyFavorites}>
+        {favorites.length > 0 ? (
+          <FavSelected className="filled" />
+        ) : (
+          <FavUnselected fill="white" />
+        )}
+        {favorites.length > 0 && favorites.length}
       </div>
     </header>
   );

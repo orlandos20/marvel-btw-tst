@@ -17,14 +17,13 @@ const ComicCard: React.FC<ComicCardProps> = ({ comicData, loading = true }) => {
           />
         )}
 
-        {loading && <div className="img-loading"></div>}
+        {loading && <div className="comic-card--img-loading"></div>}
       </div>
       <div className="comic-card--footer">
-        {/* <div className="card--footer__divider"></div> */}
         <div className="comic-card--footer__description">
           <div className="comic-card--footer__description--name">
             {!loading && <span>{comicData?.title}</span>}
-            {loading && <span className="text-loading"></span>}
+            {loading && <span className="comic-card--text-loading"></span>}
           </div>
         </div>
       </div>
