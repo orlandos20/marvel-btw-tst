@@ -5,6 +5,7 @@
 }
 
 .layout--content {
+  position: relative;
   view-transition-name: layout-content;
   padding-bottom: 5%;
 }

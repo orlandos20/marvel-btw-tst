@@ -17,6 +17,8 @@ import { useSearchCharactersUseCase } from '@/hooks/characters/useSearchCharacte
 import { useGetComicsByCharacterId } from '@/hooks/comics/useGetComicsByCharacterId';
 import { useFavouritesUseCase } from '@/hooks/characters/useFavouritesUseCase';
 
+import NoSearchResults from '@/src/assets/no-search-results-bg.webp';
+
 const Home = () => {
   const {
     state: { loading, characters, searchTerms },
@@ -97,6 +99,7 @@ const Home = () => {
           onInput={onInputChange}
         />
       </form>
+
       <Grid>
         {characters?.length > 0 &&
           characters?.map((character: Character) => (
@@ -114,6 +117,10 @@ const Home = () => {
             <CharacterCard key={index} loading />
           ))}
       </Grid>
+
+      {!loading && !characters?.length && (
+        <img className="no-search-results" src={NoSearchResults} />
+      )}
     </MainLayout>
   );
 };

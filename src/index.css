@@ -35,6 +35,16 @@ a {
   }
 } */
 
+.no-search-results {
+  position: absolute;
+  width: 100%;
+  height: 80vh;
+  top: 5%;
+  object-fit: contain;
+  z-index: -1;
+  filter: brightness(0.95);
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 4px;
