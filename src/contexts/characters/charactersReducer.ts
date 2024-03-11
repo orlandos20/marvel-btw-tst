@@ -6,7 +6,8 @@ export type Action = {
     | 'setCharacters'
     | 'searchCharacters'
     | 'setCharacterData'
-    | 'setFavorites';
+    | 'setFavorites'
+    | 'setAttributionData';
   payload: {
     [K in keyof State]?: State[K];
   };
@@ -54,6 +55,14 @@ export const characterReducer = (
         ...state,
         favorites: action.payload.favorites || state.favorites,
         searchTerms: '',
+      };
+    }
+
+    case 'setAttributionData': {
+      return {
+        ...state,
+        attributionData:
+          action.payload.attributionData || state.attributionData,
       };
     }
 

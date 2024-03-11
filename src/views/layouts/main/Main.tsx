@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import Header from '@/components/header/Header';
 import ProgressBar from '@/components/progress-bar/ProgressBar';
+import Footer from '@/components/footer/Footer';
 
 import './main-layout.css';
 import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';
@@ -22,6 +23,7 @@ const Main: React.FC<PropsWithChildren> = ({ children }) => {
       >
         {children}
       </section>
+      <Footer />
     </section>
   );
 };

@@ -18,7 +18,7 @@ export type UseGetAllCharactersUseCase = ReturnType<
 
 export const useGetAllCharactersUseCase = () => {
   const {
-    state: { characters, loading },
+    state: { characters, loading, attributionData },
     dispatch,
   } = useCharacterContext();
 
@@ -35,10 +35,11 @@ export const useGetAllCharactersUseCase = () => {
     });
 
     if (results && results?.data?.results) {
+      const { data, ...rest } = results;
       dispatch({
         type: 'setCharacters',
         payload: {
-          characters: results.data.results,
+          characters: data.results,
         },
       });
       dispatch({
@@ -47,6 +48,16 @@ export const useGetAllCharactersUseCase = () => {
           loading: false,
         },
       });
+      if (!attributionData?.copyright) {
+        dispatch({
+          type: 'setAttributionData',
+          payload: {
+            attributionData: {
+              ...rest,
+            },
+          },
+        });
+      }
     }
   };
 
@@ -57,8 +68,6 @@ export const useGetAllCharactersUseCase = () => {
   }, []);
 
   return {
-    loading,
-    characters,
     retrieveAllCharacters,
     ...params,
   };

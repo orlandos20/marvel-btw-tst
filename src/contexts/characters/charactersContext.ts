@@ -13,6 +13,11 @@ export interface State {
   };
   searchTerms: string;
   favorites: Character[];
+  attributionData: {
+    attributionHTML: string;
+    attributionText: string;
+    copyright: string;
+  };
 }
 
 export const initialState: State = {
@@ -24,6 +29,7 @@ export const initialState: State = {
   },
   searchTerms: '',
   favorites: [],
+  attributionData: {} as State['attributionData'],
 };
 
 export const CharactersContext = createContext<{
