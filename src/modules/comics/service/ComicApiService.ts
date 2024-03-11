@@ -4,6 +4,8 @@ import { Hasher } from '@/src/types';
 import { MarvelResponseWrapper } from '@/src/types/marvelApiResponseTypes';
 import { buildHashParams } from '@/src/utils/request-utils';
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 export const createComicApiRepository = ({
   requester = window.fetch,
 }: {
@@ -19,7 +21,7 @@ export const createComicApiRepository = ({
     const hashParams = buildHashParams(hasher);
 
     const response = await requester(
-      `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?${hashParams}`
+      `${baseUrl}/characters/${characterId}/comics?${hashParams}`
     );
 
     const parsedResponse = await response.json();

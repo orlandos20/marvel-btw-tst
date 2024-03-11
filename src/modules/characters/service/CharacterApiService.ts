@@ -1,30 +1,18 @@
 import {
   CharacterRepository,
   GetParams,
-  Hasher,
 } from '@/modules/characters/domain/CharacterRepository';
+import { buildHashParams } from '@/src/utils/request-utils';
 
 interface ServiceOptions {
   requester?: typeof window.fetch;
 }
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 export const createCharacterApiRepository = ({
   requester = window.fetch,
 }: ServiceOptions = {}): CharacterRepository => {
-  const ts = Date.now();
-
-  const buildHashParams = (hasher: Hasher): URLSearchParams => {
-    return new URLSearchParams({
-      ts: `${ts}`,
-      apikey: '40c33ac9e8cbe259bb9691b2a0fe2ce9',
-      hash: hasher(
-        ts +
-          '4ae51f8d6481f2664c80ead3dbc749438df0fe7d' +
-          '40c33ac9e8cbe259bb9691b2a0fe2ce9'
-      ),
-    });
-  };
-
   const getAll = async ({
     hasher,
     params = {
@@ -39,7 +27,7 @@ export const createCharacterApiRepository = ({
     );
 
     const response = await requester(
-      `https://gateway.marvel.com:443/v1/public/characters?${customParams}&${hashParams}`
+      `${baseUrl}/characters?${customParams}&${hashParams}`
     );
 
     const parsedResponse = await response.json();
@@ -65,7 +53,7 @@ export const createCharacterApiRepository = ({
     );
 
     const response = await requester(
-      `https://gateway.marvel.com:443/v1/public/characters?${customParams}&${hashParams}`
+      `${baseUrl}/characters?${customParams}&${hashParams}`
     );
 
     const parsedResponse = await response.json();
