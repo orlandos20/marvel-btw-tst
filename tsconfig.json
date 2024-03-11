@@ -29,6 +29,7 @@
       "@/views/*": ["./src/views/*"],
       "@/components/*": ["./src/views/components/*"],
       "@/types/*": ["./src/types/*"],
+      "@/test/*": ["./src/test/*"],
       "@/tests/*": ["./__tests__/*"]
     }
   },
