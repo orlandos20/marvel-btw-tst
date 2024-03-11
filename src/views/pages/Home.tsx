@@ -19,7 +19,8 @@ const Home = () => {
   const { onInputChange, submitHandler, searchTerms } =
     useSearchCharactersUseCase(retrieveAllCharacters);
   const { retrieveCharacter } = useGetCharacterUseCase();
-  const { retrieveComicsByCharacterId } = useGetComicsByCharacterId();
+  const { retrieveComicsByCharacterId, sortComicsByDate } =
+    useGetComicsByCharacterId();
 
   const {
     state: { loading, characters },
@@ -57,9 +58,10 @@ const Home = () => {
       });
       const characterInfo = await retrieveCharacter(characterId);
       const characterComics = await retrieveComicsByCharacterId(characterId);
+      const sortedComics = sortComicsByDate({ comics: characterComics });
       if (!document?.startViewTransition && characterInfo) {
         if (characterInfo) {
-          return updateState(characterInfo, characterComics);
+          return updateState(characterInfo, sortedComics);
         }
       }
 
@@ -69,7 +71,7 @@ const Home = () => {
           document?.startViewTransition(async () => {
             flushSync(() => {
               if (characterInfo) {
-                return updateState(characterInfo, characterComics);
+                return updateState(characterInfo, sortedComics);
               }
             });
           });

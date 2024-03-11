@@ -25,6 +25,11 @@ export type MarvelUrl = {
   url: string;
 };
 
+export type MarvelDates = {
+  type: string;
+  date: Date;
+};
+
 export interface ProductSummary {
   resourceURI?: string;
   name?: string;

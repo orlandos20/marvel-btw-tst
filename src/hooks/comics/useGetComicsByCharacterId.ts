@@ -1,6 +1,7 @@
 import md5 from 'md5';
 
 import { getComicByCharacterId } from '@/src/modules/comics/application/getByCharacterId';
+import { sortComicsByDate } from '@/src/modules/comics/application/sortByDate';
 import { createComicApiRepository } from '@/src/modules/comics/service/ComicApiService';
 import { Comic } from '@/src/modules/comics/domain/Comic';
 
@@ -18,5 +19,6 @@ export const useGetComicsByCharacterId = () => {
 
   return {
     retrieveComicsByCharacterId,
+    sortComicsByDate,
   };
 };

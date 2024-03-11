@@ -1,4 +1,4 @@
-import { MarvelUrl } from '@/src/types/marvelApiResponseTypes';
+import { MarvelDates, MarvelUrl } from '@/src/types/marvelApiResponseTypes';
 
 export interface Comic {
   id?: number;
@@ -22,7 +22,7 @@ export interface Comic {
   variants?: string;
   collections?: string;
   collectedIssues?: string;
-  dates?: string;
+  dates: MarvelDates[];
   creators?: string;
   characters?: string;
   stories?: string;

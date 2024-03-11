@@ -1,5 +1,7 @@
 import { ComicRepository } from '@/modules/comics/domain/ComicRepository';
+import { Comic } from '@/modules/comics/domain/Comic';
 import { Hasher } from '@/src/types';
+import { MarvelResponseWrapper } from '@/src/types/marvelApiResponseTypes';
 import { buildHashParams } from '@/src/utils/request-utils';
 
 export const createComicApiRepository = ({
@@ -13,7 +15,7 @@ export const createComicApiRepository = ({
   }: {
     hasher: Hasher;
     characterId: number;
-  }) => {
+  }): Promise<MarvelResponseWrapper<Comic[]>> => {
     const hashParams = buildHashParams(hasher);
 
     const response = await requester(

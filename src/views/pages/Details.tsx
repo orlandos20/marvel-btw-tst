@@ -22,23 +22,16 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
     dispatch,
   } = useCharacterContext();
   const { retrieveCharacter } = useGetCharacterUseCase();
-  const { retrieveComicsByCharacterId } = useGetComicsByCharacterId();
+  const { sortComicsByDate, retrieveComicsByCharacterId } =
+    useGetComicsByCharacterId();
   const [, setLocation] = useLocation();
 
-  const handleGetCharacterComics = async () => {
-    const characterComics = await retrieveComicsByCharacterId(
-      parseInt(characterId, 10)
-    );
-
-    if (characterComics) {
-      return characterComics;
-    }
-  };
-
   const handleGetCharacterData = async () => {
-    const characterInfo = await retrieveCharacter(parseInt(characterId, 10));
-    const characterComics = await handleGetCharacterComics();
-    if (characterInfo && characterComics) {
+    const parsedId = parseInt(characterId, 10);
+    const characterInfo = await retrieveCharacter(parsedId);
+    const characterComics = await retrieveComicsByCharacterId(parsedId);
+    const sortedComicsByDate = sortComicsByDate({ comics: characterComics });
+    if (characterInfo && sortedComicsByDate) {
       dispatch({
         type: 'loading',
         payload: {
@@ -50,7 +43,7 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
         payload: {
           characterData: {
             character: characterInfo,
-            comics: characterComics,
+            comics: sortedComicsByDate,
           },
         },
       });

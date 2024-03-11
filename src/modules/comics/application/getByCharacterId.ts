@@ -19,8 +19,8 @@ export const getComicByCharacterId = (
       characterId,
     });
 
-    if (results) {
-      const comics = results.data.results;
+    if (results?.data?.results.length > 0) {
+      const { results: comics } = results.data;
 
       return comics;
     } else {
