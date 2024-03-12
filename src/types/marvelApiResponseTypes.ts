@@ -4,8 +4,7 @@ interface MarvelSharedResponseProperties {
   etag: string;
 }
 
-interface MarvelResponseContainer<DataContainer>
-  extends MarvelSharedResponseProperties {
+interface MarvelResponseContainer<DataContainer> {
   offset: number;
   limit: number;
   total: number;
@@ -13,7 +12,8 @@ interface MarvelResponseContainer<DataContainer>
   results: DataContainer;
 }
 
-export interface MarvelResponseWrapper<DataContainer> {
+export interface MarvelResponseWrapper<DataContainer>
+  extends MarvelSharedResponseProperties {
   attributionHTML: string;
   attributionText: string;
   copyright: string;

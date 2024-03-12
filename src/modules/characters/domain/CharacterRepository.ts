@@ -12,7 +12,7 @@ export interface CharacterRepository {
     hasher,
     params,
   }: GetParams) => Promise<MarvelResponseWrapper<Character[]>>;
-  search?: ({
+  search: ({
     hasher,
     params,
   }: GetParams) => Promise<MarvelResponseWrapper<Character[]>>;
