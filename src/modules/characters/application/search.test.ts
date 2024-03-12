@@ -21,8 +21,24 @@ describe('Characters application layer => search', () => {
         total: 1500,
         results: [
           {
-            id: 1,
-            name: 'Character 1',
+            id: 1009610,
+            name: 'Spider-Man (Peter Parker)',
+            description: 'Description 1',
+            modified: new Date(),
+            resourceURI: '',
+            urls: [],
+            thumbnail: {
+              path: '',
+              extension: '',
+            },
+            comics: [],
+            stories: [],
+            events: [],
+            series: [],
+          },
+          {
+            id: 1011377,
+            name: 'Spider-Man (Takuya Yamashiro)',
             description: 'Description 1',
             modified: new Date(),
             resourceURI: '',
@@ -50,6 +66,7 @@ describe('Characters application layer => search', () => {
     const params = {
       limit: 50,
       offset: 10,
+      nameStartsWith: 'spider-man',
     };
 
     // Act
@@ -62,15 +79,13 @@ describe('Characters application layer => search', () => {
     }));
 
     const { searchCharacters } = await import('./search');
-
-    // Act
-
     const result = await searchCharacters(characterApiRepository)({
       hasher,
       params,
     });
 
     // Assert
+    expect(params).toHaveProperty('nameStartsWith');
     expect(result).toMatchObject(expectedResultPayload);
   });
 });
