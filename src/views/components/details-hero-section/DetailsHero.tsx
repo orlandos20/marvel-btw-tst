@@ -43,6 +43,7 @@ const DetailsHero = () => {
             <div className="hero--section--description__title">
               <h2>{name}</h2>
               <div
+                data-testid="favorite-icon"
                 onClick={(e) => handleFavorite && handleFavorite(e, character)}
               >
                 {!isFavorite && <FavUnselected className="hero-svg unfilled" />}

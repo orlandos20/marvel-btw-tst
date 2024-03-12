@@ -31,7 +31,9 @@ const Header = () => {
         ) : (
           <FavUnselected fill="white" />
         )}
-        {favorites.length > 0 && favorites.length}
+        <span data-testid="fav-counter">
+          {favorites.length > 0 && favorites.length}
+        </span>
       </div>
     </header>
   );

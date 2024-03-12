@@ -33,6 +33,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
     <div
       className="card"
       onClick={() => character && handleClick && handleClick(character?.id)}
+      data-testid="character-card"
     >
       <div className="card--image">
         {!loading && (
