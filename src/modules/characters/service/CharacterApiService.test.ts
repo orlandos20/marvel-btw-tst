@@ -4,7 +4,7 @@ import { mockRequester, mockHasher } from '@/src/test/utils';
 import { Character } from '../domain/Character';
 import { createCharacterApiRepository } from './CharacterApiService';
 
-describe('character api repository should return an array of Characters on any of his methods ', () => {
+describe('character api repository should return an array of Characters on any of his methods is called', () => {
   test('should return an array of characters greater than 1 when "getAll" is called', async () => {
     const expectedResultPayload = {
       code: 200,

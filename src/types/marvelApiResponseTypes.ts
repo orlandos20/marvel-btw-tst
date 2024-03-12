@@ -1,4 +1,7 @@
 interface MarvelSharedResponseProperties {
+  attributionHTML: string;
+  attributionText: string;
+  copyright: string;
   code: number;
   status: 'Ok';
   etag: string;
