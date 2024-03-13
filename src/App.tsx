@@ -9,7 +9,7 @@ function App() {
   return (
     <CharacterProvider>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/marvel-btw-tst" component={Home} />
 
         <Route path="/characters/:name">
           {(params) => <Details characterId={params.name} />}
