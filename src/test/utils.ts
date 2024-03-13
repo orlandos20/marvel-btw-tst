@@ -1,4 +1,5 @@
-import { cleanup, render, RenderOptions } from '@testing-library/react';
+/* eslint-disable import/export */
+import { cleanup, render } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
 
 import WrapperComponent from './WrapperComponent';
@@ -22,10 +23,7 @@ export const mockRequester = (
 
 export const mockHasher = vi.fn();
 
-function customRender(
-  ui: React.ReactElement,
-  options: Omit<RenderOptions, 'wrapper'>
-) {
+function customRender(ui: React.ReactElement, options: object) {
   return render(ui, {
     // wrap provider(s) here if needed
     // wrapper: ({ children }) => children,

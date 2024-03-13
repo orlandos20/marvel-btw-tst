@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react';
 
 import { useCharacterContext } from '@/src/contexts/characters/CharacterProvider';

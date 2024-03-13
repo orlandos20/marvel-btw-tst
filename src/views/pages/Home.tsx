@@ -93,6 +93,7 @@ const Home = () => {
     if (!characters?.length && !loading) {
       retrieveAllCharacters();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -126,7 +127,11 @@ const Home = () => {
       </Grid>
 
       {!loading && !characters?.length && (
-        <img className="no-search-results" src={NoSearchResults} />
+        <img
+          className="no-search-results"
+          alt="No search results"
+          src={NoSearchResults}
+        />
       )}
     </MainLayout>
   );

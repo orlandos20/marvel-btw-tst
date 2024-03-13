@@ -72,6 +72,7 @@ export const useSearchCharactersUseCase = (
         searchTerms: formValues.get(searchInputName) as string,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onInputChange = useCallback(
@@ -80,6 +81,7 @@ export const useSearchCharactersUseCase = (
         getAllCharacters();
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchTerms]
   );
 

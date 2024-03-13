@@ -49,6 +49,7 @@ const ProgressBar = () => {
     }
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, localProgress]);
 
   return (

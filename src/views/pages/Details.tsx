@@ -62,6 +62,7 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
       }
       handleGetCharacterData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleBackNavigation = async (e: Event) => {
@@ -79,6 +80,7 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
     window.addEventListener('popstate', (e) => handleBackNavigation(e));
 
     return () => window.removeEventListener('popstate', handleBackNavigation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
