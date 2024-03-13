@@ -36,7 +36,6 @@ const Home = () => {
   const [, setLocation] = useLocation();
 
   const updateState = (characterInfo: Character, characterComics: Comic[]) => {
-    setLocation(`/characters/${characterInfo.id}`);
     if (characterInfo) {
       dispatch({
         type: 'setCharacterData',
@@ -47,6 +46,7 @@ const Home = () => {
           },
         },
       });
+      setLocation(`/marvel-btw-tst/characters/${characterInfo.id}`);
       dispatch({
         type: 'loading',
         payload: {
@@ -58,21 +58,6 @@ const Home = () => {
 
   const handleClick = async (characterId: number) => {
     if (characterId) {
-      if (!document?.startViewTransition) {
-        setLocation(`/characters/${characterId}`);
-      }
-      if (document?.startViewTransition) {
-        const transition =
-          document &&
-          document?.startViewTransition(async () => {
-            flushSync(() => {
-              setLocation(`/characters/${characterId}`);
-            });
-          });
-
-        await transition.finished;
-      }
-
       dispatch({
         type: 'loading',
         payload: {
@@ -82,8 +67,24 @@ const Home = () => {
       const characterInfo = await retrieveCharacter(characterId);
       const characterComics = await retrieveComicsByCharacterId(characterId);
       const sortedComics = sortComicsByDate({ comics: characterComics });
-      if (characterInfo) {
-        return updateState(characterInfo, sortedComics);
+      if (!document?.startViewTransition && characterInfo) {
+        if (characterInfo) {
+          return updateState(characterInfo, sortedComics);
+        }
+      }
+
+      if (document?.startViewTransition && characterInfo) {
+        const transition =
+          document &&
+          document?.startViewTransition(async () => {
+            flushSync(() => {
+              if (characterInfo) {
+                return updateState(characterInfo, sortedComics);
+              }
+            });
+          });
+
+        await transition.finished;
       }
     }
   };

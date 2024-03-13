@@ -11,7 +11,7 @@ function App() {
       <Switch>
         <Route path="/marvel-btw-tst" component={Home} />
 
-        <Route path="/characters/:name">
+        <Route path="/marvel-btw-tst/characters/:name">
           {(params) => <Details characterId={params.name} />}
         </Route>
 

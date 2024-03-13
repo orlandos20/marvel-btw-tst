@@ -9,6 +9,7 @@ interface ServiceOptions {
 }
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const apikey = import.meta.env.VITE_PUBLIC_API_KEY;
 
 export const createCharacterApiRepository = ({
   requester = window.fetch,
@@ -67,7 +68,7 @@ export const createCharacterApiRepository = ({
 
   const getById = async (characterId: number) => {
     const response = await requester(
-      `https://gateway.marvel.com:443/v1/public/characters/${characterId}?apikey=40c33ac9e8cbe259bb9691b2a0fe2ce9`
+      `${baseUrl}/characters/${characterId}?apikey=${apikey}`
     );
 
     const parsedResponse = await response.json();
