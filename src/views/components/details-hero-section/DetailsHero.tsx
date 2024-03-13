@@ -33,6 +33,7 @@ const DetailsHero = () => {
         {!loading && (
           <img
             className="hero-section--container__image"
+            alt="character hero banner"
             src={`${path}.${extension}`}
           />
         )}
@@ -45,6 +46,11 @@ const DetailsHero = () => {
               <div
                 data-testid="favorite-icon"
                 onClick={(e) => handleFavorite && handleFavorite(e, character)}
+                onKeyDown={(e) =>
+                  handleFavorite && handleFavorite(e, character)
+                }
+                role="button"
+                tabIndex={0}
               >
                 {!isFavorite && <FavUnselected className="hero-svg unfilled" />}
                 {isFavorite && <FavSelected className="hero-svg filled" />}
@@ -58,8 +64,8 @@ const DetailsHero = () => {
             </div>
           )}
 
-          {loading && <h2 className="hero-section--text-loading"></h2>}
-          {loading && <h4 className="hero-section--text-loading"></h4>}
+          {loading && <h2 className="hero-section--text-loading"> </h2>}
+          {loading && <h4 className="hero-section--text-loading"> </h4>}
         </div>
       </div>
     </div>

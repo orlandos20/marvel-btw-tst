@@ -25,7 +25,13 @@ const Header = () => {
           <MarvelLogo />
         </Link>
       </div>
-      <div className="icon-container" onClick={showOnlyFavorites}>
+      <div
+        className="icon-container"
+        onClick={showOnlyFavorites}
+        onKeyDown={showOnlyFavorites}
+        role="button"
+        tabIndex={0}
+      >
         {favorites.length > 0 ? (
           <FavSelected className="filled" />
         ) : (

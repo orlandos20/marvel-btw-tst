@@ -10,7 +10,7 @@ interface CharacterCardProps {
   character?: Character;
   handleClick?: (characterId: number) => void;
   handleFavorite?: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent,
     character?: Character
   ) => void;
 }
@@ -33,12 +33,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
     <div
       className="card"
       onClick={() => character && handleClick && handleClick(character?.id)}
+      onKeyDown={() => character && handleClick && handleClick(character?.id)}
+      role="button"
+      tabIndex={0}
       data-testid="character-card"
     >
       <div className="card--image">
         {!loading && (
           <img
             className="card--image__content"
+            alt="marvel character"
             src={`${character?.thumbnail?.path}.${character?.thumbnail?.extension}`}
           />
         )}
@@ -55,6 +59,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           <div
             className="fav-btn"
             onClick={(e) => handleFavorite && handleFavorite(e, character)}
+            onKeyDown={(e) => handleFavorite && handleFavorite(e, character)}
+            role="button"
+            tabIndex={0}
           >
             {!isFavorite && <FavUnselected className="svg unfilled" />}
             {isFavorite && <FavSelected className="svg filled" />}

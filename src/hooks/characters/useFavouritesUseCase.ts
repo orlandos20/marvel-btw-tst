@@ -47,7 +47,7 @@ export const useFavouritesUseCase = () => {
 
   const handleFavorite = useCallback(
     (
-      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent,
       character?: Character
     ) => {
       e.preventDefault();

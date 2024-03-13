@@ -13,6 +13,7 @@ const ComicCard: React.FC<ComicCardProps> = ({ comicData, loading = true }) => {
         {!loading && (
           <img
             className="comic-card--image__content"
+            alt="comic where character appears"
             src={`${comicData?.thumbnail?.path}.${comicData?.thumbnail?.extension}`}
           />
         )}

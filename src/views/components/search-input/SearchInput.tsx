@@ -21,6 +21,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={name}>
         <SearchIcon />
       </label>
