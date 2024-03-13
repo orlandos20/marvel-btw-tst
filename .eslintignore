@@ -1,0 +1,7 @@
+node_modules/
+dist/
+env.d.ts
+.prettierrc.js
+.eslintrc.cjs
+commitlint.config.js
+playwright.config.ts

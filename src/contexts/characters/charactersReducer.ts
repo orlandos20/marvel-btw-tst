@@ -1,3 +1,4 @@
+/*eslint indent: ["error", 2, { "SwitchCase": 1 }]*/
 import { State, initialState } from './charactersContext';
 
 export type Action = {

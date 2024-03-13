@@ -33,6 +33,6 @@
       "@/tests/*": ["./__tests__/*"]
     }
   },
-  "include": ["src"],
+  "include": ["./tests/*", "vite.config.ts", ".eslintrc.cjs", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
