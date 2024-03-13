@@ -5,6 +5,7 @@ import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/marvel-btw-tst/',
   plugins: [react(), svgr()],
   resolve: {
     alias: {

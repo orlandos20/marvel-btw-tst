@@ -1,11 +1,14 @@
+import { Character } from '@/src/modules/characters/domain/Character';
+import { Comic } from '@/src/modules/comics/domain/Comic';
+import { MarvelResponseWrapper } from '@/src/types/marvelApiResponseTypes';
 import { test, expect } from '@playwright/test';
 
 const url = 'http://localhost:5173';
 const characterUrl = `${url}/characters/1010354`;
 
 test.describe('Get all E2E flow ', () => {
-  let characterData;
-  let characterComics;
+  let characterData: MarvelResponseWrapper<Character[]>;
+  let characterComics: MarvelResponseWrapper<Comic[]>;
 
   test.beforeEach(async ({ page }) => {
     await page.goto(characterUrl);
@@ -33,7 +36,10 @@ test.describe('Get all E2E flow ', () => {
     const { data: character } = characterData;
     const { data: characterComicsData } = characterComics;
 
-    if (character?.results > 0 && characterComicsData?.results > 0) {
+    if (
+      character.results.length > 0 &&
+      characterComicsData?.results.length > 0
+    ) {
       expect(heroBannerLoading).not.toBeVisible();
       expect(heroBannerLoaded).toBeVisible();
     }
