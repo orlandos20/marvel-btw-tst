@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className="header">
       <div>
-        <Link href="/" onClick={handleClick}>
+        <Link href="/marvel-btw-tst" onClick={handleClick}>
           <MarvelLogo />
         </Link>
       </div>

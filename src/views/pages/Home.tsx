@@ -36,6 +36,7 @@ const Home = () => {
   const [, setLocation] = useLocation();
 
   const updateState = (characterInfo: Character, characterComics: Comic[]) => {
+    setLocation(`/characters/${characterInfo.id}`);
     if (characterInfo) {
       dispatch({
         type: 'setCharacterData',
@@ -46,7 +47,6 @@ const Home = () => {
           },
         },
       });
-      setLocation(`/characters/${characterInfo.id}`);
       dispatch({
         type: 'loading',
         payload: {
