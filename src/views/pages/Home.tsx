@@ -58,6 +58,21 @@ const Home = () => {
 
   const handleClick = async (characterId: number) => {
     if (characterId) {
+      if (!document?.startViewTransition) {
+        setLocation(`/characters/${characterId}`);
+      }
+      if (document?.startViewTransition) {
+        const transition =
+          document &&
+          document?.startViewTransition(async () => {
+            flushSync(() => {
+              setLocation(`/characters/${characterId}`);
+            });
+          });
+
+        await transition.finished;
+      }
+
       dispatch({
         type: 'loading',
         payload: {
@@ -67,24 +82,8 @@ const Home = () => {
       const characterInfo = await retrieveCharacter(characterId);
       const characterComics = await retrieveComicsByCharacterId(characterId);
       const sortedComics = sortComicsByDate({ comics: characterComics });
-      if (!document?.startViewTransition && characterInfo) {
-        if (characterInfo) {
-          return updateState(characterInfo, sortedComics);
-        }
-      }
-
-      if (document?.startViewTransition && characterInfo) {
-        const transition =
-          document &&
-          document?.startViewTransition(async () => {
-            flushSync(() => {
-              if (characterInfo) {
-                return updateState(characterInfo, sortedComics);
-              }
-            });
-          });
-
-        await transition.finished;
+      if (characterInfo) {
+        return updateState(characterInfo, sortedComics);
       }
     }
   };
