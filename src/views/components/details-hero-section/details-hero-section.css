@@ -110,7 +110,7 @@
   }
   .hero-section--container__description {
     width: 100%;
-    & > .hero--section--container__description,
+    & > .hero--section--description__title,
     .hero--section--description__description {
       padding-inline: calc(var(--desktop-layout-padding) / 3);
     }
